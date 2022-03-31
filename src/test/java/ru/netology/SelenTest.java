@@ -21,21 +21,23 @@ public class SelenTest {
 
      @BeforeEach
     public void setUp() {
+
           driver = new ChromeDriver();
      }
 
-     @AfterEach
-    public void tearDown() {
-        driver.quit();
-        driver = null;
-     }
+    // @AfterEach
+    //public void tearDown() {
+     //   driver.quit();
+     //   driver = null;
+     //}
     @Test
     public void shouldSendForm() {
         driver.get("http://localhost:9999/");
-        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("<Бунин Александр>");
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Бунин Александр");
         driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79348564466");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.cssSelector("button")).click();
+
         String actual = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
         String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
         assertEquals(expected, actual);
